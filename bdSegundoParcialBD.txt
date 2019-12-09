@@ -1,0 +1,72 @@
+
+CREATE BATABASE SegundoParcial;
+USE SegundoParcial;
+
+CREATE TABLE socios(
+identificacion VARCHAR(15) PRIMARY KEY, 
+nombre VARCHAR(30), 
+apellido VARCHAR(30), 
+telefono VARCHAR(15), 
+direccion VARCHAR(50),
+correo VARCHAR(60)
+)
+
+CREATE TABLE barco (
+matricula VARCHAR(20) PRIMARY KEY, 
+nombre VARCHAR(30), 
+numeroAmarre VARCHAR(10), 
+cuota INT, 
+identificacionSocio VARCHAR(15),
+FOREIGN KEY(identificacionSocio) REFERENCES socios(identificacion)
+)
+
+CREATE TABLE ruta(
+idRuta VARCHAR(10) PRIMARY KEY, 
+nombre VARCHAR(30)
+)
+
+CREATE TABLE capitan(
+identificacion VARCHAR(15) PRIMARY KEY,
+nombre VARCHAR(30), 
+apellido VARCHAR(30), 
+telefono VARCHAR(15), 
+direccion VARCHAR(50),
+correo VARCHAR(60)
+)
+
+CREATE TABLE salidas(
+idOperacion int PRIMARY KEY auto_increment, 
+matriculaBarco  VARCHAR(20),
+identificacionCapitan VARCHAR(15), 
+fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+destino VARCHAR(10),
+FOREIGN KEY(destino) REFERENCES ruta(idRuta),
+FOREIGN KEY(matriculaBarco) REFERENCES barco(matricula), 
+FOREIGN KEY(identificacionCapitan) REFERENCES capitan(identificacion)
+)auto_increment=1;
+
+CREATE TABLE usuarios(
+identificacionUsuario VARCHAR(15) PRIMARY KEY,
+user VARCHAR(30),
+password VARCHAR(30),
+roll VARCHAR(20)
+)
+
+
+
+INSERT INTO socios
+(
+identificacion VARCHAR(15) PRIMARY KEY, 
+nombre VARCHAR(30), 
+apellido VARCHAR(30), 
+telefono VARCHAR(15), 
+direccion VARCHAR(50),
+correo VARCHAR(60)
+VALUES
+()
+
+
+SELECT socios.nombre AS Socio FROM barco
+INNER JOIN socios ON socios.identificacion = barco.identificacionSocio
+WHERE matricula = '1233'
+
